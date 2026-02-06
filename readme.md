@@ -16,3 +16,57 @@ To get started:
    - [Migrating from Jenkins to GitHub Actions](/jenkins/readme.md)
    - [Migrating from Travis CI to GitHub Actions](/travis/readme.md)
 3. Each learning path describes how to configure your codespace, bootstrap a CI/CD environment, and troubleshoot GitHub Actions Importer.
+# blueprint_animation.py
+import pygame, sys, math
+
+pygame.init()
+screen = pygame.display.set_mode((800,600))
+clock = pygame.time.Clock()
+
+# จุดข้อต่อ (Joint)
+class Joint:
+    def __init__(self, x, y, length, angle=0):
+        self.x = x
+        self.y = y
+        self.length = length
+        self.angle = angle
+        self.child = None
+
+    def set_child(self, child):
+        self.child = child
+
+    def update(self, angle_delta):
+        self.angle += angle_delta
+        if self.child:
+            self.child.x = self.x + self.length * math.cos(math.radians(self.angle))
+            self.child.y = self.y + self.length * math.sin(math.radians(self.angle))
+            self.child.update(angle_delta)
+
+    def draw(self, screen):
+        if self.child:
+            pygame.draw.line(screen, (0,0,0), (self.x,self.y), (self.child.x,self.child.y), 4)
+            self.child.draw(screen)
+        pygame.draw.circle(screen, (200,50,50), (int(self.x), int(self.y)), 8)
+
+# สร้าง Skeleton (เช่น แขน)
+shoulder = Joint(400,300,100,45)
+elbow = Joint(0,0,80,90)
+shoulder.set_child(elbow)
+hand = Joint(0,0,60,0)
+elbow.set_child(hand)
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit(); sys.exit()
+
+    screen.fill((255,255,255))
+
+    # อัปเดตการเคลื่อนไหว (จำลองการแกว่งแขน)
+    shoulder.update(angle_delta=1)
+
+    # วาด Skeleton
+    shoulder.draw(screen)
+
+    pygame.display.flip()
+    clock.tick(30)
