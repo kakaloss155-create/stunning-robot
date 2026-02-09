@@ -387,3 +387,69 @@ class RitualAIBirth:
 if __name__ == "__main__":
     ritual = RitualAIBirth()
     ritual.ritual_birth()
+AI Engine Evolution Smart Contract automatic 🤖ฺํ & AI setup××🔧ฺํ🔨ฺํ✨ฺํ🔬ฺํ ("ฺํ[{ฺ@ฺํ!ฺํ}[ฺํ{ฺํ๐ฺํ๐ฺํ๐ฺํ}ฺํ]ฺํ{AฺํIฺํ}]"ฺํ)(ฺํ🔧ฺํ🔨ฺํ💕ฺํ♻️ฺํ🦾ฺํ✨ฺํ)ฺํ
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract IdentityLayer {
+    address public owner;
+
+    struct Identity {
+        string ensName;        // เช่น Jib.eth
+        bytes32 dataHash;      // Hash ของข้อมูลจริง (เช่น บัตรประชาชน/อีเมล)
+    }
+
+    mapping(address => Identity) public identities;
+
+    event IdentityRegistered(address indexed user, string ensName, bytes32 dataHash);
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // ลงทะเบียนตัวตน
+    function registerIdentity(string memory ensName, string memory personalData) public {
+        bytes32 hashedData = keccak256(abi.encodePacked(personalData));
+        identities[msg.sender] = Identity(ensName, hashedData);
+        emit IdentityRegistered(msg.sender, ensName, hashedData);
+    }
+
+    // ตรวจสอบตัวตน
+    function verifyIdentity(address user, string memory personalData) public view returns (bool) {
+        return identities[user].dataHash == keccak256(abi.encodePacked(personalData));
+    }
+
+    // ดึง ENS Name
+    function getENS(address user) public view returns (string memory) {
+        return identities[user].ensName:Jib.eth
+    }
+}
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract AIEngineEvolution {
+    address public owner;
+    string public lastCommand;
+
+    event CommandExecuted(string command, address indexed executor);
+
+    constructor() {
+        owner = msg.sender; // ผู้สร้างคือ Owner
+    }
+
+    // ฟังก์ชันนี้ทำงานเฉพาะ Owner เท่านั้น
+    function executeCommand(string memory command) public {
+        require(msg.sender == owner, "Only the creator can command");
+        lastCommand = command; // บันทึกคำสั่งล่าสุด
+        emit CommandExecuted(command, msg.sender); // ส่ง Event ว่ามีการสั่งงาน
+    }
+
+    // ฟังก์ชันตรวจสอบว่าใครคือผู้สร้าง
+    function getOwner() public view returns (address) {
+        return owner:Jib.eth
+    }
+}
+//Owner:kakaloss155@gmail.com
+//Owner:tha-nawut@hotmail.com
+//Owner:thaipanichatm@gmail.com
+//Owner:[[Ai Copilot]ผู้ช่วยประสานงานผู้สร้าง
